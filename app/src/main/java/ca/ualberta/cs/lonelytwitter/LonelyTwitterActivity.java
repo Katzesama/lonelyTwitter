@@ -1,3 +1,15 @@
+/*
+ * LonelyTwitter
+ *
+ * version 1.0
+ *
+ * September 27, 2017
+ *
+ * Copyright (c) 2017 Team X, CMPUT301, University of Alberta - All Right Reserved.
+ * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behavior at University of Alberta.
+ * You can find a copy of the license in this project. Otherwise please contact contact@abc.ca.
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -24,6 +36,9 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * main class
+ */
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "file.sav";
@@ -33,7 +48,10 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 	private ArrayAdapter<Tweet> adapter;
 	
-	/** Called when the activity is first created. */
+	/** Called when the activity is first created.
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +63,10 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
 		clearButton.setOnClickListener(new View.OnClickListener() {
+			/**
+			 *
+			 * @param v view
+			 */
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				tweets.clear();
@@ -55,7 +77,10 @@ public class LonelyTwitterActivity extends Activity {
 
 		}
 		saveButton.setOnClickListener(new View.OnClickListener() {
-
+			/**
+			 *
+			 * @param v view
+			 */
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
@@ -90,6 +115,9 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/**
+	 * start the activity
+	 */
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -100,6 +128,9 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 *load the information in file
+	 */
 	private void loadFromFile() {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
@@ -117,7 +148,10 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
+	/**
+	 *update change to file
+	 */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
